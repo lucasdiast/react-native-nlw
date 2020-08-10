@@ -11,6 +11,10 @@ import styles from './styles';
 function TeacherList() {
     const [isFiltersVisible, setIsFiltersVisible] = useState(false);
 
+    const [subject, setSubject] = useState('');
+    const [week_day, setWeekDay] = useState('');
+    const [time, setTime] = useState('');
+
     function handleToggleFiltersVisible() {
         setIsFiltersVisible(!isFiltersVisible);
     }
@@ -30,6 +34,8 @@ function TeacherList() {
                         <Text style={styles.label}>Matéria</Text>
                         <TextInput
                             style={styles.input}
+                            value={subject}
+                            onChangeText={setSubject}
                             placeholder='Qual a matéria?'
                         />
 
