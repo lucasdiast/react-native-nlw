@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AppLoading } from 'expo';
 import { StatusBar } from 'expo-status-bar';
+import * as Updates from 'expo-updates';
+
 import { Archivo_400Regular, Archivo_700Bold, useFonts } from '@expo-google-fonts/archivo';
 import { Poppins_400Regular, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
 
@@ -13,6 +15,19 @@ export default function App() {
     Poppins_400Regular,
     Poppins_600SemiBold
   });
+
+  useEffect(() => {
+    async function updateApp() {
+      const { isAvailable } = await Updates.checkForUpdateAsync();
+
+      if (isAvailable) {
+        await Updates.fetchUpdateAsync();
+        await Updates.reloadAsync();
+      }
+    }
+
+    updateApp()
+  }, [])
 
   if (!fontsLoaded) {
     return <AppLoading />;
